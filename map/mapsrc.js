@@ -15,9 +15,11 @@ function updateMap(apiNodes) {
             success: function(result){
               finpath =result;
             }
+        }).done(function(){
+          console.log("FIN PATH"+ JSON.stringify(finpath));
         });
         console.log("hellp");
-        console.log(finpath.data[0].area);
+        // console.log(finpath.data[0].area);
     });
     //Coordinates data
 
