@@ -16,8 +16,7 @@
     </style>
   </head>
   <body>
-  	<div id="head" style="height:20%;"><h1>hello</h1></div>
-    <div id="map" style="height:80%;"></div>
+    <div id="map"></div>
     <script>
       var map;
       function initMap() {
@@ -29,5 +28,19 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHz2HU50FWZ6zgBu_9KGNfcp8ToFhyB8&callback=initMap"
     async defer></script>
+    <script>
+    	function detectBrowser() {
+    	  var useragent = navigator.userAgent;
+    	  var mapdiv = document.getElementById("map");
+
+    	  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+    	    mapdiv.style.width = '100%';
+    	    mapdiv.style.height = '100%';
+    	  } else {
+    	    mapdiv.style.width = '600px';
+    	    mapdiv.style.height = '800px';
+    	  }
+    	}
+    </script>
   </body>
 </html>

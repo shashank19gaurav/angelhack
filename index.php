@@ -1,1 +1,1 @@
-<?php header('Location : map/index.html'); ?>
+<?php header('Location: map'); echo "hello"; ?>
