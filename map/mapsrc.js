@@ -47,8 +47,8 @@ function updateMap(apiNodes) {
             //infoWindow.setContent(infoWindowContent[i][0]);
             //
             //
-            $('#logo').text(marker.title);
             if(currentSource=="") {
+              $('#source').text(marker.title);
               currentSource = marker.id;
               currentSourceCoord = marker.position;
               marker.setIcon("https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png");
@@ -59,6 +59,7 @@ function updateMap(apiNodes) {
               } else {
                 currentDestination = marker.id;
                 currentDestinationCoord = marker.position;
+                $('#destination').text(marker.title);
                 //marker.setIcon("https://cdn3.iconfinder.com/data/icons/location-set/50/location5-128.png");
                 console.log("Source is already selected with unique id :"+currentSource);
                 console.log("Updating destination :"+marker.title);
@@ -102,6 +103,8 @@ function updateMap(apiNodes) {
       //Hover Listener
       google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
           return function() {
+
+              $('#intermediate').text(marker.title);
               //infoWindow.setContent(infoWindowContent[i][0]);
               if(currentSource!=''){
                 console.log("Marker Postiion :", JSON.stringify(marker.position));
