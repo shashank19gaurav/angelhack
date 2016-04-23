@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   //     exit();
   //   }
 
-  	 //$link= mysqli_connect("localhost","root","brieftut","angel");
+  //	 $link= mysqli_connect("localhost","root","brieftut","angel");
   
-  $link= mysqli_connect("localhost","angel","angel123","angel");
+  $link= mysqli_connect("localhost","root","manipal","angelhack") or die('Na ho paata');
   mysqli_query($link,'SET CHARACTER SET utf8');
 
   $nid=0;
@@ -43,12 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   if(isset($_GET['city']) && !empty($_GET['city'])) {
  
         
-        $query = mysqli_query($link,"select city_id,city,Hospitality10,Medical_Facility10,Population,Areakm2,Avg_TempC,Cleanliness,Average_rainfall_mm_inches,Average_rainy_days,Average_relative_humidity_,Mean_monthly_sunshine_hours,Scenery,Cost_of_Living,Transpotation,Rating from dataset where city like '%".$_GET['city']."%'  ") or die("could not establish a connection 1");
+        $query = mysqli_query($link,"select city_id,city,Hospitality10,Medical_Facility10,Population,Areakm2,Avg_TempC,Cleanliness,Average_rainfall_mm_inches,Average_rainy_days,Average_relative_humidity_,Mean_monthly_sunshine_hours,Scenery,Cost_of_Living,Transpotation,Rating,Descrip,lat,long from dataset where city like '%".$_GET['city']."%'  ") or die("could not establish a connection 1");
     
   }
  
   else
-  $query = mysqli_query($link,"select city_id,city,Hospitality10,Medical_Facility10,Population,Areakm2,Avg_TempC,Cleanliness,Average_rainfall_mm_inches,Average_rainy_days,Average_relative_humidity_,Mean_monthly_sunshine_hours,Scenery,Cost_of_Living,Transpotation,Rating from dataset") or die("could not establish a connection 2");
+    $query = mysqli_query($link,"select city_id,city,Hospitality10,Medical_Facility10,Population,Areakm2,Avg_TempC,Cleanliness,Average_rainfall_mm_inches,Average_rainy_days,Average_relative_humidity_,Mean_monthly_sunshine_hours,Scenery,Cost_of_Living,Transpotation,Rating,Descrip,lat,`long` from dataset") or die("could not establish a connection 2");
+
 
 
   $row = array();
@@ -76,7 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
       $data["data"][$i]["costofliving"] = $row[13];
       $data["data"][$i]["transportation"] = $row[14];
       $data["data"][$i]["rating"] = $row[15];
-     
+      $data["data"][$i]["descrip"] = $row[16];
+      $data["data"][$i]["lat"] = $row[17];
+      $data["data"][$i]["long"] = $row[18];
     $i++;
 
   }
