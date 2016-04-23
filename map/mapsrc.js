@@ -3,7 +3,9 @@ function initMap() {
   var myLatlng = new google.maps.LatLng(23.0488204, 82.207838);
 
   var currentSource = '';
+  var currentSourceCoord;
   var currentDestination = '';
+  var currentDestinationCoord;
 
   var mapOptions = {
     zoom: 6,
@@ -11,7 +13,7 @@ function initMap() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   var map = new google.maps.Map(document.getElementById("map"),mapOptions);
-
+  var directionsDisplay = new google.maps.DirectionsRenderer();// also, constructor can get "DirectionsRendererOptions" object
   //Coordinates data
   
   var nodes = [{
@@ -64,12 +66,14 @@ function initMap() {
             //infoWindow.setContent(infoWindowContent[i][0]);
             if(currentSource=="") {
               currentSource = marker.id;
-              console.log("Source Selected as "+ marker.title);  
+              currentSourceCoord = marker.position;
+              console.log("Source Selected as "+ marker.title + " with coordinates " + JSON.stringify(marker.position));  
             } else {
               if(marker.id==currentSource) {
                 console.log("Source can not be same as the destination");
               } else {
                 currentDestination = marker.id;
+                currentSourceCoord.position = marker.position;
                 console.log("Source is already selected with unique id :"+currentSource);
                 console.log("Updating destination :"+marker.title);
               }
@@ -87,19 +91,19 @@ function initMap() {
               //Source is selected 
               //Get the source and the destinationcoordinates
               //Call the direction map
-              var start = new google.maps.LatLng(28.694004, 77.110291);
-              var end = marker.position;
-              var directionsDisplay = new google.maps.DirectionsRenderer();// also, constructor can get "DirectionsRendererOptions" object
-                directionsDisplay.setMap(map); // map should be already initialized.
-
-                var request = {
-                    origin : start,
-                    destination : end,
-                    travelMode : google.maps.TravelMode.DRIVING
-                };
+              var start = currentSourceCoord;
+              var end = marker.position;            
+              directionsDisplay.setMap(map); // map should be already initialized.
+              var request = {
+                  origin : start,
+                  destination : end,
+                  travelMode : google.maps.TravelMode.DRIVING
+              };
               var directionsService = new google.maps.DirectionsService(); 
+
               directionsService.route(request, function(response, status) {
                   if (status == google.maps.DirectionsStatus.OK) {
+                      directionsDisplay.setOptions({ preserveViewport: true });
                       directionsDisplay.setDirections(response);
                   }
               });
