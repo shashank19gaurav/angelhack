@@ -1,38 +1,35 @@
-// Bhopal Coordinates - 23.2599° N, 77.4126
-myLatlng = new google.maps.LatLng(23.0488204, 82.207838);
+function updateMap(apiNodes) {
+    myLatlng = new google.maps.LatLng(23.0488204, 82.207838);
 
-currentSource = '';
-currentSourceCoord;
-currentDestination = '';
-currentDestinationCoord;
-//Coordinates data
+    currentSource = '';
+    var currentSourceCoord;
+    currentDestination = '';
+    var currentDestinationCoord;
+    //Coordinates data
 
-//Populating data from the api call
-//
-apiNodes = [];
+    //Populating data from the api call
+    
+    var pathSourceDestination;
 
-pathSourceDestination;
+      var mapOptions = {
+        zoom: 6,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      var directionsService = new google.maps.DirectionsService();
+      
+      //HACK since google map does not allows two path on same directions renderer
+      var directionsDisplayPermanent = new google.maps.DirectionsRenderer({
+        polylineOptions: {
+          strokeColor: "red"
+        }
+      });
 
-  var mapOptions = {
-    zoom: 6,
-    center: myLatlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("map"),mapOptions);
-  var directionsDisplay = new google.maps.DirectionsRenderer();
-  var directionsService = new google.maps.DirectionsService();
-  
-  //HACK since google map does not allows two path on same directions renderer
-  var directionsDisplayPermanent = new google.maps.DirectionsRenderer({
-    polylineOptions: {
-      strokeColor: "red"
-    }
-  });
+      var marker = [];
+      console.log("Adding "+ apiNodes.length + " markers.");
 
-  var marker = [];
-  console.log("Adding "+ apiNodes.length + " markers.");
-
-function updateMap() {
     for (var i=0; i<apiNodes.length; i++) {
     marker = new google.maps.Marker({
           position: apiNodes[i].coord,
@@ -80,7 +77,7 @@ function updateMap() {
                   origin : currentSourceCoord,
                   destination : currentDestinationCoord,
                   travelMode : google.maps.TravelMode.DRIVING,
-                  waypoints : wayptsSSS
+                  waypoints : waypts
                 };
                
                 //Empty the original path 
@@ -142,9 +139,7 @@ function updateMap() {
                     });
                 }
 
-                
-
-
+              
 
               }
               
@@ -173,6 +168,7 @@ function initMap() {
         success: function(result){
           console.log(result.data.length);
           var city;
+          var apiNodes = [];
           for (var i=0; i<result.data.length; i++) {
             city = {
               name: result.data[i].cname,
@@ -186,7 +182,7 @@ function initMap() {
             apiNodes.push(city);
             console.log(result.data[i].long + " --  "+ JSON.stringify(city));
           }
-          console.log("Calling Update Map" + updateMap());
+          console.log("Calling Update Map" + updateMap(apiNodes));
         }
     });
   });
