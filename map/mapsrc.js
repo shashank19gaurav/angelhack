@@ -167,7 +167,7 @@ function initMap() {
   $(document).ready(function(){
     console.log("Bhai Ab location fetch honge");
     $.ajax({
-        url: "api.php", 
+        url: "http://hack.mitportals.in/api.php", 
         success: function(result){
           console.log(result.data.length);
           var city;
