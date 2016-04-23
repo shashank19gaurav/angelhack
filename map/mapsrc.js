@@ -5,6 +5,22 @@ function updateMap(apiNodes) {
     var currentSourceCoord;
     currentDestination = '';
     var currentDestinationCoord;
+
+    //set target button
+    var finpath = "";
+    document.getElementById('settarget').addEventListener("click", function(){
+        var num=1;
+        $.ajax({            
+            url: "http://hack.mitportals.in/api.php?cid=1",
+            success: function(result){
+              finpath =result;
+            }
+        }).done(function(){
+          console.log("FIN PATH"+ JSON.stringify(finpath));
+        });
+        console.log("hellp");
+        // console.log(finpath.data[0].area);
+    });
     //Coordinates data
 
     //Populating data from the api call
@@ -27,6 +43,7 @@ function updateMap(apiNodes) {
         }
       });
 
+
       var marker = [];
       console.log("Adding "+ apiNodes.length + " markers.");
 
@@ -36,6 +53,8 @@ function updateMap(apiNodes) {
           map: map,
           title: apiNodes[i].name
     });
+
+
 
     //TODO:: Assign unique identifier to each marker
     marker.set('id', apiNodes[i].uniqueId);
@@ -189,37 +208,4 @@ function initMap() {
         }
     });
   });
-
-
-  // var nodes = [{
-  //       "coord": {
-  //         "lat": 23.1993477,
-  //         "lng": 77.2658056
-  //       },
-  //       "name": "ABC",
-  //       "uniqueId": "dassad"
-  //     }, {
-  //       "coord": {
-  //         "lat": 24.1993477,
-  //         "lng": 73.2658056
-  //       },
-  //       "name": "CSD",
-  //       "uniqueId": "REED"
-  //     }, {
-  //       "coord": {
-  //         "lat": 25.1993477,
-  //         "lng": 72.2658056
-  //       },
-  //       "name": "FAKLD",
-  //       "uniqueId": "kjfwoej"
-  //     }, {
-  //       "coord": {
-  //         "lat": 27.1993477,
-  //         "lng": 76.2658056
-  //       },
-  //       "name": "dkf",
-  //       "uniqueId": "djaksdas"
-  //     }
-  //   ];
-
 }
