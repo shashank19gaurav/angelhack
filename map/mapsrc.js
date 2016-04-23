@@ -27,11 +27,6 @@ function initMap() {
           title: 'Bangalore'
     });
   }
-  var marker1 = new google.maps.Marker({
-    position: myLatlng,
-    map: map,
-    title: 'Bangalore'
-  });
   map.addListener('center_changed', function() {
     // 3 seconds after the center of the map has changed, pan back to the
     // marker.
