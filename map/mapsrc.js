@@ -47,6 +47,7 @@ function initMap() {
       }
     ];
 
+
   var marker = [];
   console.log("Adding "+ nodes.length + " markers.");
   for (var i=0; i<nodes.length; i++) {
