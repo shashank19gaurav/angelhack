@@ -17,60 +17,11 @@
   </head>
   <body>
     <div id="map"></div>
-    <script>
-      function initMap() {
-      // Bhopal Coordinates - 23.2599° N, 77.4126
-      var myLatlng = {lat: 23.1993477, lng: 77.2658056};
-
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 5,
-        center: myLatlng
-      });
-
-      var coordinates = [
-          {lat: 23.1993477, lng: 77.2658056},
-          {lat: 22.1993477, lng: 77.2658056},
-          {lat: 25.1993477, lng: 77.2658056},
-          {lat: 26.1993477, lng: 77.2658056},
-          {lat: 21.1993477, lng: 77.2658056},
-          {lat: 22.1993477, lng: 73.2658056},
-      ];
-
-
-      var marker = [];
-      console.log("Adding "+ coordinates.length + " markers.");
-      for (var i=0; i<coordinates.length; i++) {
-        marker[i] = new google.maps.Marker({
-              position: coordinates[i],
-              map: map,
-              title: 'Bangalore'
-        });
-      }
-
-      var marker1 = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: 'Bangalore'
-      });
-
-      map.addListener('center_changed', function() {
-        // 3 seconds after the center of the map has changed, pan back to the
-        // marker.
-        window.setTimeout(function() {
-          map.panTo(marker.getPosition());
-        }, 3000);
-      });
-
-      marker.addListener('click', function() {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
-      });
-    }
-    </script>
+    <script src="mapsrc.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHz2HU50FWZ6zgBu_9KGNfcp8ToFhyB8&callback=initMap"
     async defer></script>
     <script>
-    	function detectBrowser() {
+    	
     	  var useragent = navigator.userAgent;
     	  var mapdiv = document.getElementById("map");
 
@@ -81,7 +32,7 @@
     	    mapdiv.style.width = '600px';
     	    mapdiv.style.height = '800px';
     	  }
-    	}
+    	
     </script>
   </body>
 </html>
