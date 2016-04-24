@@ -123,60 +123,8 @@
 				<div class="clearfix"></div>
 				
 				<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1 col-lg-10 col-lg-offset-1">
-					<div class="years2">
-						<div class="row item wow fadeInDown">
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="year">
-									Start
-								</div>
-							</div>
-							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-								<div class="desc">
-									<h4 class="wow lightSpeedIn">Kolkata</h4>
-									<p class="wow slideInLeft">asd</p>
-								</div>
-							</div>
-						</div>
-						<div class="row item wow fadeInDown">
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="year">
-									50KM
-								</div>
-							</div>
-							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-								<div class="desc">
-									<h4 class="wow lightSpeedIn">Agra</h4>
-									<p class="wow slideInLeft">asdasd</p>
-								</div>
-							</div>
-						</div>
-						<div class="row item wow fadeInDown">
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="year">
-									100KM
-								</div>
-							</div>
-							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-								<div class="desc">
-									<h4 class="wow lightSpeedIn">Mumbai</h4>
-									<p class="wow slideInLeft">Pasdsaas</p>
-								</div>
-							</div>
-						</div>
-						<div class="row item wow fadeInDown">
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="year">
-									End
-								</div>
-							</div>
-							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-								<div class="desc">
-									<h4 class="wow lightSpeedIn">Goa</h4>
-									
-									<p class="wow slideInLeft">dasdad</p>
-								</div>
-							</div>
-						</div>
+					<div class="years2" id="abi">
+						
 						
 						
 					</div>
@@ -292,7 +240,28 @@
 	
 	
 	
-	
+	<script>
+		var retrievedObject = localStorage.getItem('finalpath');
+		var finalpath =JSON.parse(retrievedObject);
+		var cont = "";
+		var abi=document.getElementById('abi');
+		for(var i=0;i<finalpath.length;i++)
+					
+			cont+='<div class="row item wow fadeInDown">\
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">\
+								<div class="year">\
+									'+(i+1)+'\
+								</div>\
+							</div>\
+							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">\
+								<div class="desc">\
+									<h4 class="wow lightSpeedIn">'+finalpath[i].cname+'</h4>\
+									<p class="wow slideInLeft">'+finalpath[i].descrip+'</p>\
+								</div>\
+							</div>\
+						</div>'
+		document.getElementById('abi').innerHTML=cont;
+	</script>
 	
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/waypoints.min.js"></script>
