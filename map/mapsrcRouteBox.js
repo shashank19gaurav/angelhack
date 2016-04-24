@@ -9,6 +9,9 @@ var currentDestination = null;
 var currentSourceCoord = null;
 var currentDestinationCoord = null;
 var distance = null;
+var contentString = "Random";
+var infowindow = "";
+
 
 function initialize() {
   // Default the map view to the continental U.S.
@@ -161,6 +164,9 @@ function initialize() {
       }
      });      
     getMarkers();
+    infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
 }
 
 var getMarkers = function() {
@@ -205,6 +211,9 @@ function setMarkers() {
     // Click listener
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          contentString='<div id="content"><h1>'+marker.title+'</h1>'+marker.description+'</div>'
+          infowindow.setContent(contentString);
+          infowindow.open(map, marker);
            if(!currentSource) {
               $('#source').text(marker.title);
               $('#sourcedescription').text(marker.description);
