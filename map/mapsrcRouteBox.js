@@ -12,6 +12,37 @@ var distance = null;
 var contentString = "Random";
 var infowindow = "";
 
+var intermediatePoints = [];
+var intermediatePointsId = [];
+
+var fixPath = 0;
+
+var submitTrip = function() {
+  location.href = '/map/viz/index.php?a='+currentSource+'&b='+currentDestination+'&c='+intermediatePointsId;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
+var freezeNodes = function() {
+  fixPath = 1;
+}
+
+function calculateDistance(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
 
 function initialize() {
   // Default the map view to the continental U.S.
@@ -211,9 +242,9 @@ function setMarkers() {
     // Click listener
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          contentString='<div id="content"><h1>'+marker.title+'</h1>'+marker.description+'</div>'
-          infowindow.setContent(contentString);
-          infowindow.open(map, marker);
+          // approxDistance = calculateDistance();
+          
+          
            if(!currentSource) {
               $('#source').text(marker.title);
               $('#sourcedescription').text(marker.description);
@@ -221,13 +252,63 @@ function setMarkers() {
               currentSourceCoord = marker.position;
               marker.setIcon("https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png");
               console.log("Source Selected as "+ marker.title + " with coordinates " + JSON.stringify(marker.position));  
+
+
             } 
            else {
               if(marker.id==currentSource) {
                 console.log("Source can not be same as the destination");
-              } else {
+              } else if(typeof pathSourceDestination !== 'undefined') {
+                  //Source and destination are already selected
+                  //
+                  intermediatePoints.push(marker);
+                  intermediatePointsId.push(marker.id);
+                  console.log(intermediatePointsId);
+                  console.log("Beech ka path"+ " length of waypoints :"+intermediatePoints.length);
+                   directionsDisplayPermanent.setDirections({routes: []});
+                   var waypts = [];
+                    if(intermediatePoints.length!=0) {
+                      //Dummy Waypoints
+                      var temp;
+                      for(var i=0; i<intermediatePoints.length; i++) {
+
+                        // currentSourceObj = JSON.parse(JSON.stringify(currentSourceCoord));
+                        // currentDestinationObj = JSON.parse(JSON.stringify(marker.position));
+                        //console.log(JSON.stringify(intermediatePoints[i]));
+                        temp = JSON.parse(JSON.stringify(intermediatePoints[i].position));
+                        console.log("Marker ka titel"+ marker.title +"Coordinates Testing, lat : "+temp.lat + " long : "+ temp.lng);
+                        stop = new google.maps.LatLng(temp.lat, temp.lng)
+                        waypts.push({
+                            location: stop,
+                            stopover: true
+                        });  
+                      }
+                    }
+
+                    pathSourceDestination = {
+                      origin : currentSourceCoord,
+                      destination : currentDestinationCoord,
+                      travelMode : google.maps.TravelMode.DRIVING,
+                      waypoints: waypts,
+                    };
+                    console.log("Waypoints"+ waypts);
+
+                    directionsDisplayPermanent.setDirections({routes: []});
+                    console.log("Path from Soruce to destianation sets");
+
+                    directionService.route(pathSourceDestination, function(response, status) {
+                      if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplayPermanent.setOptions({ preserveViewport: true });
+                        directionsDisplayPermanent.setOptions({ suppressMarkers: true });
+                        directionsDisplayPermanent.setDirections(response);
+                      }
+                    });
+
+              }else {
                 currentDestination = marker.id;
                 currentDestinationCoord = marker.position;
+
+                console.log("Current Approx distance "+ approxDistance);
                 $('#destination').text(marker.title);
                 $('#destinationdescription').text(marker.description);
                 //marker.setIcon("https://cdn3.iconfinder.com/data/icons/location-set/50/location5-128.png");
@@ -236,14 +317,7 @@ function setMarkers() {
 
                directionsDisplayPermanent.setDirections({routes: []});
             
-                //Dummy Waypoints
-                var waypts = [];
 
-                stop = new google.maps.LatLng(25.1993477, 72.26580560000002)
-                waypts.push({
-                    location: stop,
-                    stopover: true
-                });
                 pathSourceDestination = {
                   origin : currentSourceCoord,
                   destination : currentDestinationCoord,
@@ -266,7 +340,6 @@ function setMarkers() {
 
               }
             }
-            
         }
       })(marker, i));
 
@@ -303,6 +376,13 @@ function setMarkers() {
                     }
                 });
 
+                currentSourceObj = JSON.parse(JSON.stringify(currentSourceCoord));
+                currentDestinationObj = JSON.parse(JSON.stringify(marker.position));
+
+                console.log(currentSourceObj.lat + " "+ currentSourceObj.lng +  currentDestinationObj.lat+ currentDestinationObj.lng);
+                approxDistance = calculateDistance(currentSourceObj.lat, currentSourceObj.lng, currentDestinationObj.lat, currentDestinationObj.lng);
+                contentString='<div id="content"><h1>'+marker.title+'</h1>'+marker.description+'<br/>Apporoximate Distance : '+approxDistance+' KM </div>';
+
                 if (typeof pathSourceDestination !== 'undefined') {
                     console.log("Permanent Coordinates :"+ JSON.stringify(pathSourceDestination));
                     directionService.route(pathSourceDestination, function(response, status) {
@@ -313,6 +393,8 @@ function setMarkers() {
                       }
                     });
                 }
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
               }
               
           }
@@ -324,6 +406,7 @@ function setMarkers() {
               if(currentSource!=''){
                   directionsRenderer.setDirections({routes: []});
               }
+              infowindow.close();
           }
       })(marker, i));
 
