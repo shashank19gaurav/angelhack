@@ -34,6 +34,179 @@ function setTargetButton() {
       url: "http://hack.mitportals.in/api.php?cid=1",
       success: function(result){
           finpath =result;
+=======
+function updateMap(apiNodes) {
+    myLatlng = new google.maps.LatLng(23.0488204, 82.207838);
+
+    currentSource = '';
+    var currentSourceCoord;
+    currentDestination = '';
+    var currentDestinationCoord;
+
+    //set target button
+    var finpath = "";
+    document.getElementById('settarget').addEventListener("click", function(){
+        var num=1;
+        $.ajax({            
+            url: "http://hack.mitportals.in/api.php?cid=1",
+            success: function(result){
+              finpath =result;
+            }
+        }).done(function(){
+          console.log("FIN PATH"+ JSON.stringify(finpath));
+        });
+        console.log("hellp");
+        // console.log(finpath.data[0].area);
+    });
+    //Coordinates data
+
+    //Populating data from the api call
+    
+    var pathSourceDestination;
+
+      var mapOptions = {
+        zoom: 6,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "saturation": 43
+            },
+            {
+                "lightness": -11
+            },
+            {
+                "hue": "#0088ff"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "hue": "#ff0000"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 99
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#808080"
+            },
+            {
+                "lightness": 54
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ece2d9"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ccdca1"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#767676"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#b8cb93"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "stylers": [
+            {
+                "visibility": "on"
+        ]
+    },
+    {
+        "featureType": "poi.medical",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    }
+]
+      };
+      var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      var directionsService = new google.maps.DirectionsService();
+      
+      //HACK since google map does not allows two path on same directions renderer
+      var directionsDisplayPermanent = new google.maps.DirectionsRenderer({
+        polylineOptions: {
+          strokeColor: "red"
         }
       }).done(function(){
         console.log("FIN PATH"+ JSON.stringify(finpath));
