@@ -1,3 +1,26 @@
+<?php
+	if (isset($_GET['s'])&&isset($_GET['d']))
+	{
+		if (isset($_GET['f']))
+		{
+			//code to get other nodes
+		}
+		else
+		{
+			$ch = curl_init();  
+			 $url='http://hack.mitportals.in/api.php?cid=1';
+			    curl_setopt($ch,CURLOPT_URL,$url);
+			    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+			//  curl_setopt($ch,CURLOPT_HEADER, false); 
+			 
+			    $output=curl_exec($ch);
+			 
+			    curl_close($ch);
+			    var_dump($output);
+		}
+		$err=1; //src and destination not selected
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -270,12 +293,8 @@
 	<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=4.1.5'></script>
 	<script type="text/javascript" src="js/jquery.knob.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-
-
-	
-	
-	
-	
+	<script type="text/javascript" src="js/script.js"></script>	
 </body>
 </html>
+
+
