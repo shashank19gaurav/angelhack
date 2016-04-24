@@ -29,16 +29,17 @@ function initialize() {
         strokeColor: "red"
       }
      });      
+    getMarkers();
 }
 
-function getMarkers() {
-  $(document).ready(function(){
+var getMarkers = function() {
     console.log("Fetching the location from API");
     $.ajax({
         url: "http://hack.mitportals.in/api.php", 
         success: function(result){
           console.log(result.data.length);
           var city;
+          apiNodes = [];
           for (var i=0; i<result.data.length; i++) {
             city = {
               name: result.data[i].cname,
@@ -52,15 +53,14 @@ function getMarkers() {
             apiNodes.push(city);
             console.log(result.data[i].long + " --  "+ JSON.stringify(city));
           }
-          console.log("Calling Update Map" + setMarkers());
         }
+    }).done(function() {
+      console.log("Calling Update Map" + setMarkers());
     });
-  });
 }
 
 function setMarkers() {
   console.log("Adding "+ apiNodes.length + " markers.");
-
     for (var i=0; i<apiNodes.length; i++) {
     marker = new google.maps.Marker({
           position: apiNodes[i].coord,
@@ -109,14 +109,15 @@ function setMarkers() {
                 directionsDisplayPermanent.setDirections({routes: []});
                 console.log("Path from Soruce to destianation sets");
 
-                directionService.route(pathSourceDestination, function(response, status) {
-                  if (status == google.maps.DirectionsStatus.OK) {
-                    directionsDisplayPermanent.setOptions({ preserveViewport: true });
-                    directionsDisplayPermanent.setOptions({ suppressMarkers: true });
-                    directionsDisplayPermanent.setDirections(response);
-                  }
-                });
+                // directionService.route(pathSourceDestination, function(response, status) {
+                //   if (status == google.maps.DirectionsStatus.OK) {
+                //     directionsDisplayPermanent.setOptions({ preserveViewport: true });
+                //     directionsDisplayPermanent.setOptions({ suppressMarkers: true });
+                //     directionsDisplayPermanent.setDirections(response);
+                //   }
+                // });
 
+                route(pathSourceDestination);
 
               }
             }
@@ -176,7 +177,6 @@ function setMarkers() {
               if(currentSource!=''){
                   directionsRenderer.setDirections({routes: []});
               }
-              
           }
       })(marker, i));
 
@@ -187,28 +187,21 @@ function setMarkers() {
 
 getMarkers();
 
-function route() {
-  // Clear any previous route boxes from the map
-  clearBoxes();
-  
+function route(request) {
   // Convert the distance to box around the route from miles to km
-  distance = parseFloat(document.getElementById("distance").value) * 1.609344;
-  
-  var request = {
-    origin: document.getElementById("from").value,
-    destination: document.getElementById("to").value,
-    travelMode: google.maps.DirectionsTravelMode.DRIVING
-  }
+  distance = 2;
   
   // Make the directions request
   directionService.route(request, function(result, status) {
     if (status == google.maps.DirectionsStatus.OK) {
-      directionsRenderer.setDirections(result);
+      directionsDisplayPermanent.setOptions({ preserveViewport: true });
+      directionsDisplayPermanent.setOptions({ suppressMarkers: true });
+      directionsDisplayPermanent.setDirections(result);
       
       // Box around the overview path of the first route
       var path = result.routes[0].overview_path;
       var boxes = routeBoxer.box(path, distance);
-      drawBoxes(boxes);
+      //drawBoxes(boxes);
     } else {
       alert("Directions query failed: " + status);
     }
