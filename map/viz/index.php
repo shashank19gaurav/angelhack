@@ -1,26 +1,4 @@
-<?php
-	if (isset($_GET['s'])&&isset($_GET['d']))
-	{
-		if (isset($_GET['f']))
-		{
-			//code to get other nodes
-		}
-		else
-		{
-			$ch = curl_init();  
-			 $url='http://hack.mitportals.in/api.php?cid=1';
-			    curl_setopt($ch,CURLOPT_URL,$url);
-			    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-			//  curl_setopt($ch,CURLOPT_HEADER, false); 
-			 
-			    $output=curl_exec($ch);
-			 
-			    curl_close($ch);
-			    var_dump($output);
-		}
-		$err=1; //src and destination not selected
-	}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +11,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
         
 	
-	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<!-- ==============================================
 	Stylesheet
 	=============================================== -->
@@ -264,26 +242,36 @@
 	
 	
 	<script>
-		var retrievedObject = localStorage.getItem('finalpath');
-		var finalpath =JSON.parse(retrievedObject);
-		var cont = "";
-		var abi=document.getElementById('abi');
-		for(var i=0;i<finalpath.length;i++)
-					
-			cont+='<div class="row item wow fadeInDown">\
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">\
-								<div class="year">\
-									'+(i+1)+'\
-								</div>\
-							</div>\
-							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">\
-								<div class="desc">\
-									<h4 class="wow lightSpeedIn">'+finalpath[i].cname+'</h4>\
-									<p class="wow slideInLeft">'+finalpath[i].descrip+'</p>\
-								</div>\
-							</div>\
-						</div>'
-		document.getElementById('abi').innerHTML=cont;
+		var result=""
+		console.log("sdf");
+		$.ajax({
+	        url: "http://hack.mitportals.in/api.php", 
+	        success: function(result){
+	          console.log(result.data.length);
+	            console.log(result.data[0].long + " --  ");
+	          }
+	    }).done(function() {
+	      		var cont = "";
+	      		var abi=document.getElementById('abi');
+	      		for(var i=0;i<result.length;i++)
+	      					
+	      			cont+='<div class="row item wow fadeInDown">\
+	      							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">\
+	      								<div class="year">\
+	      									'+(i+1)+'\
+	      								</div>\
+	      							</div>\
+	      							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">\
+	      								<div class="desc">\
+	      									<h4 class="wow lightSpeedIn">'+result.data[i].cname+'</h4>\
+	      									<p class="wow slideInLeft">'+result.data[i].descrip+'</p>\
+	      								</div>\
+	      							</div>\
+	      						</div>'
+	      		document.getElementById('abi').innerHTML=cont;
+	    });
+
+		
 	</script>
 	
 	<script type="text/javascript" src="js/jquery.min.js"></script>
