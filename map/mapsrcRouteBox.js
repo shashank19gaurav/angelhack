@@ -9,6 +9,9 @@ var currentDestination = null;
 var currentSourceCoord = null;
 var currentDestinationCoord = null;
 var distance = null;
+var contentString = "Random";
+var infowindow = "";
+
 
 function initialize() {
   // Default the map view to the continental U.S.
@@ -161,6 +164,9 @@ function initialize() {
       }
      });      
     getMarkers();
+    infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
 }
 
 var getMarkers = function() {
@@ -178,7 +184,8 @@ var getMarkers = function() {
                 lng: parseFloat(result.data[i].lng),
                 lat: parseFloat(result.data[i].lat)
               },
-              uniqueId: result.data[i].cid
+              uniqueId: result.data[i].cid,
+              descrip:result.data[i].descrip
             }
 
             apiNodes.push(city);
@@ -196,15 +203,20 @@ function setMarkers() {
     marker = new google.maps.Marker({
           position: apiNodes[i].coord,
           map: map,
-          title: apiNodes[i].name
+          title: apiNodes[i].name,
+          description : apiNodes[i].descrip
     });
     marker.set('id', apiNodes[i].uniqueId);
 
     // Click listener
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          contentString='<div id="content"><h1>'+marker.title+'</h1>'+marker.description+'</div>'
+          infowindow.setContent(contentString);
+          infowindow.open(map, marker);
            if(!currentSource) {
               $('#source').text(marker.title);
+              $('#sourcedescription').text(marker.description);
               currentSource = marker.id;
               currentSourceCoord = marker.position;
               marker.setIcon("https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png");
@@ -217,6 +229,7 @@ function setMarkers() {
                 currentDestination = marker.id;
                 currentDestinationCoord = marker.position;
                 $('#destination').text(marker.title);
+                $('#destinationdescription').text(marker.description);
                 //marker.setIcon("https://cdn3.iconfinder.com/data/icons/location-set/50/location5-128.png");
                 console.log("Source is already selected with unique id :"+currentSource);
                 console.log("Updating destination :"+marker.title);
@@ -261,6 +274,8 @@ function setMarkers() {
     google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
           return function() {
               $('#intermediate').text(marker.title);
+              $('#intermediatedescription').text(marker.description);
+              console.log($('#intermediatedescription'));
               //infoWindow.setContent(infoWindowContent[i][0]);
               if(!(!currentSource)){
                 console.log("Marker Postiion :", JSON.stringify(marker.position));
