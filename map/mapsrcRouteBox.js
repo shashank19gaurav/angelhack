@@ -15,7 +15,7 @@ function initialize() {
   var mapOptions = {
     center: new google.maps.LatLng(23.0488204, 82.207838),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    zoom: 6,
+    zoom: 5,
     styles: [
         {
         "featureType": "water",

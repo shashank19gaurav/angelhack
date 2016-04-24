@@ -1,0 +1,93 @@
+<script>var testObject = [{
+cid: "1",
+cname: "Bangalore",
+hosp: "7.0",
+med: "6.0",
+pop: "2851335.0",
+area: "868",
+temp: "32",
+clean: "58",
+avgrain: "1466.0",
+avgraindays: "41.0",
+avgrainhumid: "77.0",
+mmsunshinehrs: "2180.0",
+scenery: "9.10",
+costofliving: "6000.00",
+transportation: "8.0",
+rating: "7.56",
+descrip: "The startup city",
+lat: "12.9716? N",
+lng: "77.5946? E"
+},
+{
+cid: "2",
+cname: "Mumbai",
+hosp: "9.5",
+med: "8.5",
+pop: "2216880.0",
+area: "709",
+temp: "24",
+clean: "61",
+avgrain: "974.5",
+avgraindays: "58.5",
+avgrainhumid: "65.2",
+mmsunshinehrs: "2360.9",
+scenery: "8.40",
+costofliving: "17000.00",
+transportation: "9.2",
+rating: "7.50",
+descrip: "Ye mumbai he meri jaan.",
+lat: "19.0760? N",
+lng: "72.8777? E"
+},
+{
+cid: "3",
+cname: "Patna",
+hosp: "10.0",
+med: "7.0",
+pop: "58288966.0",
+area: "1715",
+temp: "20",
+clean: "62",
+avgrain: "1088.0",
+avgraindays: "66.0",
+avgrainhumid: "84.0",
+mmsunshinehrs: "2073.0",
+scenery: "7.80",
+costofliving: "15000.00",
+transportation: "9.0",
+rating: "8.32",
+descrip: "Patnaiya Awesome he",
+lat: "25.5941? N",
+lng: "85.1376? E"
+},
+{
+cid: "4",
+cname: "Kolkata",
+hosp: "6.0",
+med: "7.0",
+pop: "52818528.0",
+area: "1375",
+temp: "18",
+clean: "70",
+avgrain: "735.0",
+avgraindays: "54.0",
+avgrainhumid: "58.0",
+mmsunshinehrs: "2040.0",
+scenery: "8.40",
+costofliving: "12000.00",
+transportation: "5.0",
+rating: "8.73",
+descrip: "Korbo Lorbo Jeetbo re",
+lat: "22.5726? N",
+lng: "88.3639? E"
+}];
+
+// Put the object into storage
+localStorage.setItem('finalpath', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('finalpath');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+</script>
