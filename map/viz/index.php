@@ -1,3 +1,87 @@
+<?php/*
+
+function getData($cid)
+{
+	$ch = curl_init();  
+	$url='http://hack.mitportals.in/api.php?cid='.$cid;
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);		 
+    $res=curl_exec($ch);
+    curl_close($ch);
+    return $res;
+}
+//a=src,b=destin,c=1,2,3
+if(isset($_GET['a'])&&isset($_GET['b'])&&isset($_GET['c']))
+{
+	$s=$_GET['a'];
+	$d=$_GET['b'];
+	$arr=$_GET['c'];
+	$arr=split(',', $arr);
+	/*for($i=0;$i<count($arr);$i++)
+		var_dump($arr[$i]);
+	*/
+	// $alldata=array();
+	// $alldata[0]=json_decode(getData($s));
+	// $alldata[1]=json_decode(getData($d));
+		/*
+		$data = array();
+		$data["data"] = array();
+
+		$t=getData($s);		
+
+		$data["data"][$i]["cid"] = json_decode($t, true)["data"][0]["cid"];
+	    $data["data"][$i]["cname"] = json_decode($t, true)["data"][0]["cname"];
+	    $data["data"][$i]["hosp"] = json_decode($t, true)["data"][0]["hosp"];
+	    $data["data"][$i]["med"] = json_decode($t, true)["data"][0]["med"];
+	    $data["data"][$i]["pop"] = json_decode($t, true)["data"][0]["pop"];
+	    $data["data"][$i]["area"] =json_decode($t, true)["data"][0]["area"];
+	    $data["data"][$i]["temp"] = json_decode($t, true)["data"][0]["temp"];
+	    $data["data"][$i]["clean"] = json_decode($t, true)["data"][0]["clean"];
+	    $data["data"][$i]["avgrain"] = json_decode($t, true)["data"][0]["avgrain"];
+	    $data["data"][$i]["avgraindays"] = json_decode($t, true)["data"][0]["avgraindays"];
+	    $data["data"][$i]["avgrainhumid"] = json_decode($t, true)["data"][0]["avgrainhumid"];
+	    $data["data"][$i]["mmsunshinehrs"] = json_decode($t, true)["data"][0]["mmsunshinehrs"];
+	    $data["data"][$i]["scenery"] = json_decode($t, true)["data"][0]["scenery"];
+	    $data["data"][$i]["costofliving"] = 	 json_decode($t, true)["data"][0]["costofliving"];
+	    $data["data"][$i]["transportation"] =  json_decode($t, true)["data"][0]["transportation"];
+	    $data["data"][$i]["rating"] =  json_decode($t, true)["data"][0]["rating"];
+	    $data["data"][$i]["descrip"] =  json_decode($t, true)["data"][0]["descrip"];
+	    $data["data"][$i]["lat"] =  json_decode($t, true)["data"][0]["lat"];
+	    $data["data"][$i]["lng"] =  json_decode($t, true)["data"][0]["lng"];
+
+	    for($i=1;$i<count($arr);$i++)
+	    {
+	    		$t=getData($arr[$i]);		    
+	    		$data["data"][$i]["cid"] = json_decode($t, true)["data"][0]["cid"];
+	    $data["data"][$i]["cname"] = json_decode($t, true)["data"][0]["cname"];
+	    $data["data"][$i]["hosp"] = json_decode($t, true)["data"][0]["hosp"];
+	    $data["data"][$i]["med"] = json_decode($t, true)["data"][0]["med"];
+	    $data["data"][$i]["pop"] = json_decode($t, true)["data"][0]["pop"];
+	    $data["data"][$i]["area"] =json_decode($t, true)["data"][0]["area"];
+	    $data["data"][$i]["temp"] = json_decode($t, true)["data"][0]["temp"];
+	    $data["data"][$i]["clean"] = json_decode($t, true)["data"][0]["clean"];
+	    $data["data"][$i]["avgrain"] = json_decode($t, true)["data"][0]["avgrain"];
+	    $data["data"][$i]["avgraindays"] = json_decode($t, true)["data"][0]["avgraindays"];
+	    $data["data"][$i]["avgrainhumid"] = json_decode($t, true)["data"][0]["avgrainhumid"];
+	    $data["data"][$i]["mmsunshinehrs"] = json_decode($t, true)["data"][0]["mmsunshinehrs"];
+	    $data["data"][$i]["scenery"] = json_decode($t, true)["data"][0]["scenery"];
+	    $data["data"][$i]["costofliving"] = 	 json_decode($t, true)["data"][0]["costofliving"];
+	    $data["data"][$i]["transportation"] =  json_decode($t, true)["data"][0]["transportation"];
+	    $data["data"][$i]["rating"] =  json_decode($t, true)["data"][0]["rating"];
+	    $data["data"][$i]["descrip"] =  json_decode($t, true)["data"][0]["descrip"];
+	    $data["data"][$i]["lat"] =  json_decode($t, true)["data"][0]["lat"];
+	    $data["data"][$i]["lng"] =  json_decode($t, true)["data"][0]["lng"];
+	    }
+
+
+
+	var_dump(json_encode($data));
+	//
+	//
+
+}*/
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +125,7 @@
 
 </head>
 
-<body onload="disp('http://hack.mitportals.in/api.php?cid=1')">
+<body onload="disp('http://hack.mitportals.in/api.php?gpath=1&c1=1&c2=4')">
 	
 	<!-- BANNER SECTION -->
 	<section class="section banner">
@@ -167,7 +251,7 @@
 								<div class="separator_second_circle_grey"></div>
 							</div>
 						</div>
-						<p class="subtitle wow fadeInDown">"The only way to do great work is to love what you do." <br>- Steve Jobs</p>
+						<p class="subtitle wow fadeInDown">“Some beautiful paths can't be discovered without getting lost.”<br>- Eril Ozan</p>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -245,8 +329,8 @@
 			      		document.getElementById('abi').innerHTML=cont;
 
 
-			      		document.getElementById('add').addEventListener("click", function(){ alert(myurl); });
-			      		document.getElementById('rem').addEventListener("click", function(){ alert(myurl); });
+			      		//document.getElementById('add').addEventListener("click", function(){ alert(myurl); });
+			      		//document.getElementById('rem').addEventListener("click", function(){ alert(myurl); });
 
 
 			    });
