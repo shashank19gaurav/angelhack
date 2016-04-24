@@ -41,7 +41,7 @@
 
 </head>
 
-<body>
+<body onload="disp('http://hack.mitportals.in/api.php?cid=1')">
 	
 	<!-- BANNER SECTION -->
 	<section class="section banner">
@@ -84,8 +84,8 @@
           </button> -->
           <a class="navbar-brand" href="index.html" data-slide="1">
 			<div class="logo">
-				<h2><span>Abhinav</span> Agrawal</h2>
-				<div>Self taught developer</div>
+				<h2><span>Code</span>Trip</h2>
+				<div>Road-trip visualizer</div>
 			</div>
 		  </a>
         </div>
@@ -121,17 +121,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="clearfix"></div>
-				
-				<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1 col-lg-10 col-lg-offset-1">
-					<div class="years2" id="abi">
-						
-						
-						
+			</div>
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					
+					<div class="clearfix"></div>					
+					<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1 col-lg-10 col-lg-offset-1">
+						<div class="years2" id="abi">							
+						</div>					
 					</div>
-				
 				</div>
-				
+
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="title">
+							<h2 class="title-section wow fadeInDown">Change Path</h2>
+							<div class="separator_wrapper wow fadeIn">
+								<div class="separator_first_circle">
+									<div class="separator_second_circle_grey"></div>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-default btn-primary" id="add">Add a stop</button>
+							<button type="submit" class="btn btn-default btn-primary" id="rem">Remove a stop</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		
@@ -146,7 +161,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-15 col-lg-12">
 					<div class="title">
-						<h2 class="title-section wow fadeInDown">Projects & Achievments</h2>
+						<h2 class="title-section wow fadeInDown">Example Road Trips</h2>
 						<div class="separator_wrapper wow fadeIn">
 							<div class="separator_first_circle">
 								<div class="separator_second_circle_grey"></div>
@@ -157,80 +172,37 @@
 				</div>
 				<div class="clearfix"></div>
 				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox" onclick="disp('http://hack.mitportals.in/api.php?gpath=1&c1=1&c2=4')">
 					<div class="fa fa-book"></div>
 					<div class="desc">
-						<h4>The Book Hub</h4>
-						<p>Developed a website that functions as an online repository for novels and course books and facilitating lending & purchase of books between students at Manipal University</p>
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-cogs"></div>
-					<div class="desc">
-						<h4>Multiple function registration system</h4>
-						<p>Database and Registration System for the Technical and the Cultural Fest of MIT, Manipal. The portal was developed majorly in PHP, MySQL.</p>
-					</div>
-				</div>
-
-				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-home"></div>
-					<div class="desc">
-						<h4>Room Booking System</h4>
-						<p>Developed the Room Booking System for MIT Manipal. </p>
+						<h4>Bangalore-Kolkata</h4>
+						<p>asdsadasd</p>
 					</div>
 				</div>
 				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-globe"></div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox" onclick="disp('http://hack.mitportals.in/api.php?gpath=1&c1=2&c2=3')">
+					<div class="fa fa-book"></div>
 					<div class="desc">
-						<h4>Placement Portal Development Team</h4>
-						<p>Part of the Placement Portal Development Team at the Placement Office, Manipal Institute of Technology. </p>
+						<h4>Mumbai-Patna</h4>
+						<p>asdsadasd</p>
 					</div>
 				</div>
-
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox" onclick="disp('http://hack.mitportals.in/api.php?gpath=1&c1=1&c2=4')">
+					<div class="fa fa-book"></div>
+					<div class="desc">
+						<h4>Bangalore-Kolkata</h4>
+						<p>asdsadasd</p>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox" onclick="disp('http://hack.mitportals.in/api.php?gpath=1&c1=1&c2=4')">
+					<div class="fa fa-book"></div>
+					<div class="desc">
+						<h4>Bangalore-Kolkata</h4>
+						<p>asdsadasd</p>
+					</div>
+				</div>
 				<div class="clearfix"></div>
-				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-code"></div>
-					<div class="desc">
-						<h4>Multiple websites: </h4>
-						<ul>
-							<li>thebookhub.in</li>
-							<li>csaconsultants.in</li>
-							<li>brajmayafoundation.org</li>
-							<li>mitportals.in</li>
-							<li>lightthenight.in</li>
-							<li>mitstudentcouncil.com</li>
-						</ul>
-					</div>
-				</div>
-				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-google"></div>
-					<div class="desc">
-						<h4>Google Adwords</h4>
-						<p>Certified by Google AdWords certification exams.</p>
-					</div>
-				</div>
-				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-inr"></div>
-					<div class="desc">
-						<h4>Online Marketting</h4>
-						<p>Handled SEO and Online marketing campaign, as well as server and website optimization for CSA Consultants Pvt. Ltd.</p>
-					</div>
-				</div>
-				
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 servbox">
-					<div class="fa fa-mobile"></div>
-					<div class="desc">
-						<h4>App Dev</h4>
-						<p>Developed 2 apps at Microsoft Hackathon : COde.Fun.Do 2014 & 2015 organised at MIT Manipal</p>
-					</div>
-				</div>
-				
+				<hr>
 				
 			</div>
 		</div>
@@ -242,34 +214,43 @@
 	
 	
 	<script>
-		var result=""
-		console.log("sdf");
-		$.ajax({
-	        url: "http://hack.mitportals.in/api.php", 
-	        success: function(result){
-	          console.log(result.data.length);
-	            console.log(result.data[0].long + " --  ");
-	          }
-	    }).done(function() {
-	      		var cont = "";
-	      		var abi=document.getElementById('abi');
-	      		for(var i=0;i<result.length;i++)
-	      					
-	      			cont+='<div class="row item wow fadeInDown">\
-	      							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">\
-	      								<div class="year">\
-	      									'+(i+1)+'\
-	      								</div>\
-	      							</div>\
-	      							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">\
-	      								<div class="desc">\
-	      									<h4 class="wow lightSpeedIn">'+result.data[i].cname+'</h4>\
-	      									<p class="wow slideInLeft">'+result.data[i].descrip+'</p>\
-	      								</div>\
-	      							</div>\
-	      						</div>'
-	      		document.getElementById('abi').innerHTML=cont;
-	    });
+		
+		function disp(myurl)
+		{
+				var result=""
+				console.log("sdf");
+				$.ajax({
+			        url: myurl, 
+			        success: function(result){
+			          console.log(result.data.length);
+			            console.log(result.data[0].long + " --  ");
+			          }
+			    }).done(function(result) {
+			      		var cont = "";
+			      		var abi=document.getElementById('abi');
+			      		for(var i=0;i<result.data.length;i++)	      					
+			      			cont+='<div class="row item wow fadeInDown">\
+			      							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">\
+			      								<div class="year">\
+			      									'+(i+1)+'\
+			      								</div>\
+			      							</div>\
+			      							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">\
+			      								<div class="desc">\
+			      									<h4 class="wow lightSpeedIn">'+result.data[i].cname+'</h4>\
+			      									<p class="wow slideInLeft">'+result.data[i].descrip+'</p>\
+			      								</div>\
+			      							</div>\
+			      						</div>'
+			      		document.getElementById('abi').innerHTML=cont;
+
+
+			      		document.getElementById('add').addEventListener("click", function(){ alert(myurl); });
+			      		document.getElementById('rem').addEventListener("click", function(){ alert(myurl); });
+
+
+			    });
+			}
 
 		
 	</script>
