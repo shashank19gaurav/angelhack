@@ -19,8 +19,7 @@ function initialize() {
   };
   
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  routeBoxer = new RouteBoxer();
-  
+ 
   directionService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer({ map: map });      
   directionsDisplayPermanent = new google.maps.DirectionsRenderer({ 
@@ -73,6 +72,7 @@ function setMarkers() {
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
            if(!currentSource) {
+              $('#source').text(marker.title);
               currentSource = marker.id;
               currentSourceCoord = marker.position;
               marker.setIcon("https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png");
@@ -84,7 +84,7 @@ function setMarkers() {
               } else {
                 currentDestination = marker.id;
                 currentDestinationCoord = marker.position;
-                // $('#destination').text(marker.title);
+                $('#destination').text(marker.title);
                 //marker.setIcon("https://cdn3.iconfinder.com/data/icons/location-set/50/location5-128.png");
                 console.log("Source is already selected with unique id :"+currentSource);
                 console.log("Updating destination :"+marker.title);
@@ -128,7 +128,7 @@ function setMarkers() {
     //Hover Listener
     google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
           return function() {
-              // $('#intermediate').text(marker.title);
+              $('#intermediate').text(marker.title);
               //infoWindow.setContent(infoWindowContent[i][0]);
               if(!(!currentSource)){
                 console.log("Marker Postiion :", JSON.stringify(marker.position));
@@ -190,7 +190,7 @@ getMarkers();
 function route(request) {
   // Convert the distance to box around the route from miles to km
   distance = 2;
-  
+  routeBoxer = new RouteBoxer();
   // Make the directions request
   directionService.route(request, function(result, status) {
     if (status == google.maps.DirectionsStatus.OK) {
@@ -199,8 +199,8 @@ function route(request) {
       directionsDisplayPermanent.setDirections(result);
       
       // Box around the overview path of the first route
-      var path = result.routes[0].overview_path;
-      var boxes = routeBoxer.box(path, distance);
+      //var path = result.routes[0].overview_path;
+      //var boxes = routeBoxer.box(path, distance);
       //drawBoxes(boxes);
     } else {
       alert("Directions query failed: " + status);
