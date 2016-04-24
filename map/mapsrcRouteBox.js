@@ -17,6 +17,10 @@ var intermediatePointsId = [];
 
 var fixPath = 0;
 
+var submitTrip = function() {
+  location.href = '/map/viz/index.php?a='+currentSource+'&b='+currentDestination+'&c='+intermediatePointsId;
+}
+
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
@@ -258,6 +262,8 @@ function setMarkers() {
                   //Source and destination are already selected
                   //
                   intermediatePoints.push(marker);
+                  intermediatePointsId.push(marker.id);
+                  console.log(intermediatePointsId);
                   console.log("Beech ka path"+ " length of waypoints :"+intermediatePoints.length);
                    directionsDisplayPermanent.setDirections({routes: []});
                    var waypts = [];
