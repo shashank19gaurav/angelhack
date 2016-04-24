@@ -24,7 +24,7 @@
     </style>
     <script src="assets/js/jquery.min.js"></script>
 	</head>
-	<body>
+	<body onload="initialize()">
 		<!-- Header -->
 			<section id="header">
 				<header style="margin-bottom: 0px;">
@@ -59,11 +59,11 @@
 		<!-- Wrapper -->
 			
 				 <div id="map"></div>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHz2HU50FWZ6zgBu_9KGNfcp8ToFhyB8&callback=initMap&sensor=false"
-				async defer></script>
-
-				<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js"></script>
-				<script src="map/mapsrc.js"></script>
+				<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHz2HU50FWZ6zgBu_9KGNfcp8ToFhyB8"
+    async defer></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js" type="text/javascript"></script>
+    <script src="map/mapsrcRouteBox.js"></script>
 
 <div id="wrapper">
 				<!-- Footer -->
